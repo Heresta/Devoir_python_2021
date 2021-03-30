@@ -1,0 +1,19 @@
+{% extends "conteneur.html" %}
+{% block afternav %}
+    {% include "metadonnees/recherche_plat.html" %}
+{% endblock %}
+{% block corps %}
+    <h1>Bienvenue</h1>
+    <p>
+        {% if plats %}
+        Il y a {{ plats|length }} plats enregistrés :</p>
+        <ul>
+            {% for plat in plats %}
+            <li><a href="{{url_for('plat', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+
+{% endblock %}
