@@ -20,6 +20,16 @@ class Authorship(db.Model):
         }
 
 
+class Composition(db.Model):
+    __tablename__ = "composition"
+    composition_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
+    composition_plat_id = db.Column(db.Integer, db.ForeignKey('plat.plat_id'))
+    composition_ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.ingredient_id'))
+    composition_ingredient = db.relationship('Ingredient', back_populates="composition")
+    composition_plat = db.relationship('Plat', back_populates="composition")
+    quantite = db.Column(db.String)
+
+
 class Plat(db.Model):
     plat_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     plat_nom = db.Column(db.Text)
@@ -27,6 +37,7 @@ class Plat(db.Model):
     plat_type = db.Column(db.String(45))
     plat_nombre_convives = db.Column(db.Integer)
     authorships = db.relationship("Authorship", back_populates="plat")
+    composition = db.relationship("Composition", back_populates="composition_plat")
 
     def to_jsonapi_dict(self):
         return {
@@ -55,3 +66,4 @@ class Ingredient(db.Model):
     ingredient_id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True, nullable=False)
     ingredient_nom = db.Column(db.Text)
     ingredient_type = db.Column(db.Text)
+    composition = db.relationship("Composition", back_populates="composition_ingredient")
