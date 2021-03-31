@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect
 
 from .app import app, login
-from .modeles.donnees import Plat, Ingredient
+from .modeles.donnees import Plat, Ingredient, Composition
 from .modeles.users import User
 from .constantes import PLAT_PAR_PAGE
 from flask_login import login_user, current_user, logout_user
@@ -16,7 +16,13 @@ def accueil():
 @app.route("/plats/<int:plat_id>")
 def plat(plat_id):
     unique_plat = Plat.query.get(plat_id)
-    return render_template("pages/plat.html", plat=unique_plat)
+    for composition in Composition.query.get(Composition.composition_plat_id):
+        if composition == plat_id:
+            compositions = Composition.query.get(Composition.composition_ingredient_id)
+    for ingre in compositions:
+        if ingre == Ingredient.query.get(Ingredient.ingredient_id):
+            ingredi = Ingredient.query.get(Ingredient.ingredient_id)
+    return render_template("pages/plat.html", plat=unique_plat, ingredients=ingredi)
 
 
 @app.route("/ingredients/all")
