@@ -18,12 +18,7 @@
 </head>
 <body>
    <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand" href="{{ url_for('accueil') }}">Le hasard des recettes</a>
-       <ul class="navbar-nav mr-auto">
-           <li class="nav-item">
-               <a class="nav-link" href="{{url_for('browse')}}">Navigation</a>
-           </li>
-       </ul>
+        <a class="navbar-brand" href="{{url_for('accueil')}}">Le hasard des recettes</a>
        <ul class="navbar-nav mr-auto">
            {% if not current_user.isauthenticated %}
            <li class="nav-item">
@@ -36,6 +31,9 @@
            <li class="nav-item">
                <a class="nav-link" href="{{url_for('deconnexion')}}">Déconnexion ({{current_user.user_nom}})</a>
            </li>
+           <li class="nav-item">
+               <a class="btn btn-secondary btn-lg" href="{{url_for('ajout_recette')}}">Ajouter une recette</a>
+           </li>
            {% endif %}
        </ul>
        <form class="form-inline" action="{{url_for('recherche_plat')}}" method="GET">
@@ -46,8 +44,6 @@
            <input class="form-control" name="keyword" type="search" placeholder="Recherche d'ingrédient" aria-label="Recherche">
            <button class="btn btn-outline-info" type="submit">Rechercher</button>
        </form>
-
-
 </nav>
       {% block afternav %}{%endblock%}
       <div class="container">
