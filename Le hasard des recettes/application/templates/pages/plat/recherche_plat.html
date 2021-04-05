@@ -1,16 +1,16 @@
 {% extends "conteneur.html" %}
 
-{% block titre %}| Navigation : Page {{resultats.page}}{% endblock %}
+{% block titre %}| {{titre}}{% endblock %}
 
 {% block corps %}
-<h1>Navigation</h1>
-{% if resultats %}
-    <p>Il y a {{resultats.total}} plats qui répondent à votre requête :</p>
-    <ul>
+<h1>{{titre}}</h1>
+    {% if resultats %}
+    <p>Il y a {{resultats.total}} plats qui répondent à votre recherche.</p>
         {% for plat in resultats.items %}
-        <li><a href="{{url_for('plat', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
         {% endfor %}
-    </ul>
     <nav aria-label="research-pagination">
         <ul class="pagination">
             {%- for page in resultats.iter_pages() %}
@@ -33,4 +33,5 @@
     <p>Vous n'avez pas entré de mot-clef. Veuillez entrer un mot-clef dans la barre de recherche
         et cliquer sur "Recherche".</p>
     {% endif %}
+<p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
 {% endblock %}

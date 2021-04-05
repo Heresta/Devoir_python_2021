@@ -3,13 +3,17 @@
 {% block titre %}| {{titre}}{% endblock %}
 
 {% block corps %}
-{% include "metadonnees/recherche_plat.html" %}
 <h1>{{titre}}</h1>
+<form class="form-inline" action="{{url_for('recherche_plat_convives')}}" method="GET">
+    <input class="form-control" name="keyword" type="number" placeholder="Recherche par nombre de convives"
+           aria-label="Recherche">
+    <button class="btn btn-secondary btn-lg" type="submit">Rechercher</button>
+</form>
     {% if resultats %}
-    <p>Il y a {{resultats.total}} plats qui répondent à votre recherche.</p>
+    <p>Il y a {{resultats.total}} plats qui correspondent à votre recherche.</p>
         {% for plat in resultats.items %}
         <ul>
-            <li><a href="{{url_for('plat', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
         </ul>
         {% endfor %}
     <nav aria-label="research-pagination">
@@ -18,7 +22,7 @@
                 {% if page %}
                     {% if page != resultats.page %}
                         <li class="page-item">
-                            <a class="page-link" href="{{url_for('recherche_plat', keyword=keyword,
+                            <a class="page-link" href="{{url_for('recherche_plat_convives', keyword=keyword,
                             page=page)}}">{{page}}</a>
                         </li>
                     {% endif %}
@@ -34,4 +38,5 @@
     <p>Vous n'avez pas entré de mot-clef. Veuillez entrer un mot-clef dans la barre de recherche
         et cliquer sur "Recherche".</p>
     {% endif %}
+<p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
 {% endblock %}

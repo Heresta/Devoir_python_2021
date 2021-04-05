@@ -2,11 +2,17 @@
 
 {% block titre %}
     {% if plat %}| Plat : {{plat.plat_nom}} {% endif %}
+
 {% endblock %}
 
 {% block corps %}
+
     {% if plat %}
         <h1>{{plat.plat_nom}}</h1>
+            <p><a class="btn btn-secondary btn-lg" href="{{url_for('suppression', ids=plat.plat_id)}}">
+                Supprimer cette entrée ({{plat.plat_nom}})</a>
+</p>
+            <h2>Informations</h2>
             <dl>
                 <dt>Type de plat :</dt><dd>{{plat.plat_type}}</dd>
                 <dt>Nombre de convives :</dt><dd>{{plat.plat_nombre_convives}}</dd>

@@ -1,0 +1,13 @@
+{% extends "conteneur.html" %}
+
+{% block corps %}
+{% if plat %}
+        <h1>Supprimer l'entrée "{{plat.plat_nom}}"</h1>
+<p>Numéro d'ID : {{plat.plat_id}}</p>
+{% endif %}
+<p>Pour confirmer la suppression, veuillez entrer le numéro d'id dans la zone ci-dessous</p>
+<form class="form-inline" action="{{url_for('supprimer')}}" method="GET">
+           <input class="form-control" name="keyword" type="number" placeholder="ID" aria-label="Recherche">
+           <button class="btn btn-secondary btn-lg" type="submit">Rechercher</button>
+       </form>
+{% endblock %}

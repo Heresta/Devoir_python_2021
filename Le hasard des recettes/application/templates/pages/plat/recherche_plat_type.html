@@ -1,0 +1,58 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}| Recherche par type{% endblock %}
+
+{% block corps %}
+<h1>Recherche par type</h1>
+<div>
+    {% if resultats_entree %}
+    <p>Il y a {{resultats_entree|length}} plats qui correspondent au type "Entrée".</p>
+        {% for plat in resultats_entree %}
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_pp %}
+    <p>Il y a {{resultats_pp|length}} plats qui correspondent au type "Plat principal".</p>
+        {% for plat in resultats_pp %}
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_accompagnement %}
+    <p>Il y a {{resultats_accompagnement|length}} plats qui correspondent au type "Accompagnement".</p>
+        {% for plat in resultats_accompagnement %}
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_dessert %}
+    <p>Il y a {{resultats_dessert|length}} plats qui correspondent au type "Dessert".</p>
+        {% for plat in resultats_dessert %}
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_autre %}
+    <p>Il y a {{resultats_autre|length}} plats qui correspondent au type "Autre".</p>
+        {% for plat in resultats_autre %}
+        <ul>
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "conteneur.html" %}
+
+{% block corps %}
+<div>
+    <div>
+        <p>Rechercher par : <a href="recherche_plat_convives">Nombre de convives</a> ou
+            <a href="{{url_for('recherche_plat_type')}}">Type de recette</a></p>
+    </div>
+    <p>
+        {% if plats %}
+        Il y a {{ plats|length }} plats enregistrés :</p>
+        <ul>
+            {% for plat in plats %}
+            <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+</div>
+{% endblock %}

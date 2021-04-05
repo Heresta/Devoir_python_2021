@@ -4,16 +4,19 @@
 {% endblock %}
 {% block corps %}
     <h1>Bienvenue</h1>
-    <p>
-        {% if plats %}
-        Il y a {{ plats|length }} plats enregistrés :</p>
-        <ul>
-            {% for plat in plats %}
-            <li><a href="{{url_for('plat', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>La base de données est en cours de constitution</p>
-        {% endif %}
-
+    <div>
+    <p>Vous êtes sur la page d'accueil d'une application Flask.</p>
+    <p>Cette application recense des liens vers de bonnes recettes de cuisine.</p>
+    <p>Pour l'instant, il est possible de faire une recherche parmi les plats proposés.</p>
+    <div>
+        <a href="{{url_for('plat')}}">Liste générale des plats</a>
+    </div>
+    <p>Les améliorations de cette applications sont les suivantes :</p>
+    <ul>
+        <li>Ajouter un moteur de recherche par ingrédient</li>
+        <li>Ajouter à chaque page de plat la liste des ingrédients et leur quantité</li>
+        <li>Rendre les liens vers sur les plats cliquables</li>
+        <li>Ajouter une fonctionnalité d'édition</li>
+    </ul>
+</div>
 {% endblock %}
