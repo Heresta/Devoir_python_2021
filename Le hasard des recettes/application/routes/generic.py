@@ -27,13 +27,13 @@ def plat(plat_id):
 @app.route("/ingredients/all")
 def ingredients():
     ingr = Ingredient.query.all()
-    return render_template("pages/ingredient.html", ingredients=ingr)
+    return render_template("pages/ingredient/ingredient.html", ingredients=ingr)
 
 
 @app.route("/ingredients/<int:ingredient_id>")
 def ingredient(ingredient_id):
     unique_ingredient = Ingredient.query.get(ingredient_id)
-    return render_template("pages/ingredient_info.html", ingredient=unique_ingredient)
+    return render_template("pages/ingredient/ingredient_info.html", ingredient=unique_ingredient)
 
 
 @app.route("/recherche_plat", methods=["GET", "POST"])
@@ -55,7 +55,7 @@ def recherche_plat():
                                       ).paginate(page=page, per_page=PLAT_PAR_PAGE)
         titre = "Résultat pour la recherche '" + motclef + "'"
 
-    return render_template("pages/recherche_plat.html", resultats=resultats, titre=titre, keyword=motclef)
+    return render_template("pages/plat/recherche_plat.html", resultats=resultats, titre=titre, keyword=motclef)
 
 
 @app..route("/recherche_plat_type")
@@ -111,7 +111,7 @@ def recherche_ingredient():
                                             ).paginate(page=page, per_page=PLAT_PAR_PAGE)
         titre = "Résultat pour la recherche '" + motclef + "'"
 
-    return render_template("pages/recherche_ingredient.html", resultats=resultats, titre=titre)
+    return render_template("pages/ingredient/recherche_ingredient.html", resultats=resultats, titre=titre)
 
                              
 @app.route("/ajout_recette", methods=["GET", "POST"])
