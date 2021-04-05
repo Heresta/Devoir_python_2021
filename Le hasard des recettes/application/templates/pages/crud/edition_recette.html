@@ -1,0 +1,63 @@
+{% extends "conteneur.html" %}
+
+{% block corps %}
+<h1>Modifier la fiche de la recette "{{plat.plat}}"</h1>
+<div>
+    <h2>Informations</h2>
+    <form method="POST" action="{{url_for('editer_recette')}}">
+            <dl>
+                <dt>Nom du plat</dt><dd>{{plat.plat_nom}}</dd><dd><label for="register-nom" class="col-sm-2 col-form-label">Nouveau nom de la recette</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="register-nom" name="nom" placeholder="Nouveau nom">
+        </div></dd>
+                <dt>Type du plat :</dt><dd>{{plat.plat_type}}</dd><dd><label for="register-type" class="col-sm-2 col-form-label">Nouveau type de la recette</label>
+        <div>
+            <select id="register-type" name="type">
+                <option value="">Choisir une option</option>
+                <option value="Plat principal">Plat principal</option>
+                <option value="Entrée">Entrée</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Accompagnement">Accompagnement</option>
+                <option value="Autre">Autre</option>
+            </select>
+        </div></dd>
+                <dt>Nombre de convives :</dt><dd>{{plat.plat_nombre_convives}}</dd><dd><label for="register-nombre" class="col-sm-2 col-form-label">Nouveau nombre de convives</label>
+        <div>
+            <select id="register-nombre" name="nombre">
+                <option value="">Choisir une option</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+            </select>
+        </div></dd>
+                <dt>Lien vers la recette :</dt><dd>{{plat.plat_recette}}</dd><dd><label for="register-recette" class="col-sm-2 col-form-label">Nouveau lien vers la recette</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="register-recette" name="recette" placeholder="Nouveau lien vers la recette">
+        </div></dd>
+            </dl>
+    <div>
+        <p>Numéro d'ID : {{plat.plat_id}}</p>
+        <p>Pour confirmer la modification, veuillez entrer le numéro d'id dans la zone ci-dessous</p>
+        <form class="form-inline" action="{{url_for('supprimer')}}" method="GET">
+           <input class="form-control" name="keyword" type="number" placeholder="ID" aria-label="Recherche">
+       </form>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+        </form>
+</div>
+<div>
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+</div>
+{% endblock %}
