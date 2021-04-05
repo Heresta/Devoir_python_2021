@@ -7,16 +7,21 @@ from ..modeles.donnees import Plat, Ingredient
 from ..modeles.users import User
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def accueil():
-    plats = Plat.query.all()
-    return render_template("pages/accueil.html", plats=plats)
+    return render_template("pages/accueil.html")
+
+
+@app.route("/plat", methods=["GET", "POST])
+def plat():
+    plats = Plat.query.order_by(Plat.plat_nom).all()
+    return render_template("pages/plat/plat.html", plats=plats)
 
 
 @app.route("/plats/<int:plat_id>")
 def plat(plat_id):
     unique_plat = Plat.query.get(plat_id)
-    return render_template("pages/plat.html", plat=unique_plat)
+    return render_template("pages/plat/plat.html", plat=unique_plat)
 
 
 @app.route("/ingredients/all")
@@ -31,7 +36,7 @@ def ingredient(ingredient_id):
     return render_template("pages/ingredient_info.html", ingredient=unique_ingredient)
 
 
-@app.route("/recherche_plat")
+@app.route("/recherche_plat", methods=["GET", "POST"])
 def recherche_plat():
     motclef = request.args.get("keyword", None)
     page = request.args.get("page", 1)
@@ -53,6 +58,40 @@ def recherche_plat():
     return render_template("pages/recherche_plat.html", resultats=resultats, titre=titre, keyword=motclef)
 
 
+@app..route("/recherche_plat_type")
+def recherche_plat_type():
+    resultats_plat_principal = Plat.query.filter(Plat.plat_type == "Plat principal").order_by(Plat.plat_nom).all()
+    resultats_dessert = Plat.query.filter(Plat.plat_type == "Dessert").order_by(Plat.plat_nom).all()
+    resultats_entree = Plat.query.filter(Plat.plat_type == "Entrée").order_by(Plat.plat_nom).all()
+    resultats_accompagnement = Plat.query.filter(Plat.plat_type == "Accompagnement").order_by(Plat.plat_nom).all()
+    resultats_autre = Plat.query.filter(Plat.plat_type == "Autre").order_by(Plat.plat_nom).all()
+    return render_template("pages/plat/recherche_plat_type.html", resultats_pp=resultats_plat_principal,
+                           resultats_dessert=resultats_dessert, resultats_entree=resultats_entree,
+                           resultats_accompagnement=resultats_accompagnement, resultats_autre=resultats_autre)
+
+                             
+@app.route("/recherche_plat_convives", methods=["GET", "POST"])
+def recherche_plat_convives():
+    motclef = request.args.get("keyword", None)
+    page = request.args.get("page", 1)
+
+    if isinstance(page, str) and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
+    resultats = []
+
+    titre = "Recherche de plats par nombre de convives"
+
+    if motclef:
+        resultats = Plat.query.filter(Plat.plat_nombre_convives.like("%{}%".format(motclef))
+                                      ).paginate(page=page, per_page=PLAT_PAR_PAGE)
+        titre = "Résultats pour la recherche : '" + motclef + "' convive(s)"
+
+    return render_template("pages/plat/recherche_plat_convives.html", resultats=resultats, titre=titre, keyword=motclef)
+                             
+                             
 @app.route("/recherche_ingredient")
 def recherche_ingredient():
     motclef = request.args.get("keyword", None)
@@ -74,19 +113,43 @@ def recherche_ingredient():
 
     return render_template("pages/recherche_ingredient.html", resultats=resultats, titre=titre)
 
-
-@app.route("/browse")
-def browse():
-    page = request.args.ger("page", 1)
-
-    if isinstance(page, str) and page.isdigit():
-        page = int(page)
+                             
+@app.route("/ajout_recette", methods=["GET", "POST"])
+def ajout_recette():
+    if request.method == "POST":
+        statut, donnees = Plat.ajout(
+            nom=request.form.get("nom", None),
+            recette=request.form.get("recette", None),
+            typologie=request.form.get("type", None),
+            nombre=request.form.get("nombre", None)
+        )
+        if statut is True:
+            flash("Enregistrement effectué.", "success")
+            return redirect("/")
+        else:
+            flash("Les erreurs suivantes ont été rencontrées : " + ",".join(donnees), "error")
+            return render_template("pages/ajout_recette.html")
+    return render_template("pages/crud/ajout_recette.html")
+          
+                             
+@app.route("/supprimer", methods=["GET", "POST"])
+def supprimer():
+    motclef = request.args.get("keyword", None)
+    if motclef:
+        id = Plat.query.filter(Plat.plat_id == motclef).first()
+        db.session.delete(id)
+        db.session.commit()
+        flash("Le plat a bien été supprimé")
+        return redirect("/")
     else:
-        page = 1
-    resultats = Plat.query.paginate(page=page, per_page=PLAT_PAR_PAGE)
+        flash("L'application n'a pas réussi à supprimer ce plat")
+    return redirect("/")
 
-    return render_template("pages/browse.html", resultats=resultats)
 
+@app.route("/supprimer/<int:ids>", methods=["GET", "POST"])
+def suppression(ids):
+    unique_plat = Plat.query.get(ids)
+    return render_template("pages/plat/suppression.html", plat=unique_plat)
 
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -108,7 +171,7 @@ def inscription():
         return render_template("pages/inscription.html")
 
 
-@app.route("/connexion")
+@app.route("/connexion", methods=["GET", "POST"])
 def connexion():
     if current_user.is_authenticated is True:
         flash("Vous êtes déjà connecté(e)", "info")
