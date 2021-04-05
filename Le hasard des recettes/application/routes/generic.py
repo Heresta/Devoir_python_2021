@@ -130,6 +130,50 @@ def ajout_recette():
             flash("Les erreurs suivantes ont été rencontrées : " + ",".join(donnees), "error")
             return render_template("pages/ajout_recette.html")
     return render_template("pages/crud/ajout_recette.html")
+                            
+                             
+@app.route("/editer_recette", methods=["GET", "POST"])
+def editer_recette():
+    id = request.form.get("keyword", None)
+    if id:
+        if request.method == "POST":
+            nouveau_nom = request.form.get("nom", None)
+            nouvelle_recette = request.form.get("recette", None)
+            nouvelle_typologie = request.form.get("type", None)
+            nouveau_nombre = request.form.get("nombre", None)
+            modifications = []
+            if request.form.get("nom", None):
+                update_nom = Plat.query.filter(Plat.plat_id == id).first()
+                update_nom.plat_nom = nouveau_nom
+                db.session.commit()
+                modifications.append("Le nom de la recette a bien été modifié. ")
+            elif request.form.get("recette", None):
+                update_recette = Plat.query.filter(Plat.plat_id == id).first()
+                update_recette.plat_recette = nouvelle_recette
+                db.session.commit()
+                modifications.append("Le lien vers la recette a bien été modifié. ")
+            elif request.form.get("type", None):
+                update_typologie = Plat.query.filter(Plat.plat_id == id).first()
+                update_typologie.plat_type = nouvelle_typologie
+                db.session.commit()
+                modifications.append("Le type de la recette a bien été modifié. ")
+            elif request.form.get("nombre", None):
+                update_nombre = Plat.query.filter(Plat.plat_id == id).first()
+                update_nombre.plat_nombre_convives = nouveau_nombre
+                db.session.commit()
+                modifications.append("Le nombre de convives de la recette a bien été modifié. ")
+            return redirect("/")
+        else:
+            flash("L'application n'a pas réussi à modifier la/les information(s) de ce plat")
+            return redirect("/")
+    else:
+        return redirect("/plat")
+
+
+@app.route("/edition_recette/<int:plat_id>", methods=["GET", "POST"])
+def edition_recette(plat_id):
+    unique_plat = Plat.query.get(plat_id)
+    return render_template("pages/crud/edition_recette.html", plat=unique_plat)                             
           
                              
 @app.route("/supprimer", methods=["GET", "POST"])
