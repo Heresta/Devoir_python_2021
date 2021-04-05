@@ -12,6 +12,8 @@
             <p><a class="btn btn-secondary btn-lg" href="{{url_for('suppression', ids=plat.plat_id)}}">
                 Supprimer cette entrée ({{plat.plat_nom}})</a>
 </p>
+<p><a class="btn btn-secondary btn-lg" href="{{url_for('edition_recette', plat_id=plat.plat_id)}}">
+    Editer cette recette ({{plat.plat_nom}})</a></p>
             <h2>Informations</h2>
             <dl>
                 <dt>Type de plat :</dt><dd>{{plat.plat_type}}</dd>
