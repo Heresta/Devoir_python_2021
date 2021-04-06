@@ -1,7 +1,11 @@
 {% extends "conteneur.html" %}
 {% block corps %}
     <h1>Bienvenue</h1>
-    <p>
+    <div>
+        <div>
+            <p>Rechercher par : <a href="{{url_for('recherche_ingredient_type')}}">
+                Type d'ingrédient</a></p>
+        </div>
         {% if ingredients %}
         Il y a {{ ingredients|length }} ingrédients enregistrés :</p>
         <ul>
