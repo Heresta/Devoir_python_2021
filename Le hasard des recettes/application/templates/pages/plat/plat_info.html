@@ -20,6 +20,12 @@
                 <dt>Nombre de convives :</dt><dd>{{plat.plat_nombre_convives}}</dd>
                 <dt>Lien vers la recette :</dt><dd>{{plat.plat_recette}}</dd>
             </dl>
+            <h2>Ingrédients</h2>
+            <ul>
+                {% for quantite, ingredient in i %}
+                <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a> : {{quantite}}</li>
+                {% endfor %}
+            </ul>
     {% else %}
         La base de données est en cours de constitution
     {% endif %}
