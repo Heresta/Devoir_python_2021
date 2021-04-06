@@ -10,6 +10,12 @@
             <dl>
                 <dt>Type d'ingrédient :</dt><dd>{{ingredient.ingredient_type}}</dd>
             </dl>
+            <h2>Plat(s) réalisés avec l'ingrédient '{{ingredient.ingredient_nom}}'</h2>
+            <ul>
+                {% for plat in p %}
+                <li><a href="{{url_for('plat_info', plat_id=plat.plat_id)}}">{{plat.plat_nom}}</a></li>
+                {% endfor %}
+            </ul>
     {% else %}
         La base de données est en cours de constitution
     {% endif %}
