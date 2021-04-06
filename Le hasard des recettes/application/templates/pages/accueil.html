@@ -1,7 +1,5 @@
 {% extends "conteneur.html" %}
-{% block afternav %}
-    {% include "metadonnees/recherche_plat.html" %}
-{% endblock %}
+
 {% block corps %}
     <h1>Bienvenue</h1>
     <div>
@@ -9,14 +7,13 @@
     <p>Cette application recense des liens vers de bonnes recettes de cuisine.</p>
     <p>Pour l'instant, il est possible de faire une recherche parmi les plats proposés.</p>
     <div>
-        <a href="{{url_for('plat')}}">Liste générale des plats</a>
+        <span><a href="{{url_for('plat')}}">Liste générale des plats</a> | <a href="{{url_for('ingredients')}}">
+            Liste générale des ingrédients</a></span>
     </div>
     <p>Les améliorations de cette applications sont les suivantes :</p>
     <ul>
-        <li>Ajouter un moteur de recherche par ingrédient</li>
-        <li>Ajouter à chaque page de plat la liste des ingrédients et leur quantité</li>
         <li>Rendre les liens vers sur les plats cliquables</li>
-        <li>Ajouter une fonctionnalité d'édition</li>
+        <li>Ajouter une fonctionnalité de récupération de plat au hasard</li>
     </ul>
 </div>
 {% endblock %}
