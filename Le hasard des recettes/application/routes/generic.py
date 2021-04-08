@@ -58,7 +58,7 @@ def recherche_plat():
     return render_template("pages/plat/recherche_plat.html", resultats=resultats, titre=titre, keyword=motclef)
 
 
-@app..route("/recherche_plat_type")
+@app.route("/recherche_plat_type")
 def recherche_plat_type():
     resultats_plat_principal = Plat.query.filter(Plat.plat_type == "Plat principal").order_by(Plat.plat_nom).all()
     resultats_dessert = Plat.query.filter(Plat.plat_type == "Dessert").order_by(Plat.plat_nom).all()
