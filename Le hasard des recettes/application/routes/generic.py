@@ -12,7 +12,7 @@ def accueil():
     return render_template("pages/accueil.html")
 
 
-@app.route("/plat", methods=["GET", "POST])
+@app.route("/plat", methods=["GET", "POST"])
 def plat():
     plats = Plat.query.order_by(Plat.plat_nom).all()
     return render_template("pages/plat/plat.html", plats=plats)
