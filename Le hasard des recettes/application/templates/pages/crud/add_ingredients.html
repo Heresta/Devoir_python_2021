@@ -1,0 +1,46 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}| Ajout d'ingredients pour la recette '{{plat.plat_nom}}'{% endblock %}
+
+{% block corps %}
+<div class="form-group-row">
+    <form class="form" method="POST" action="{{url_for('add_ingredients')}}">
+    <h1>Ingrédients pour la recette '{{plat.plat_nom}}'</h1>
+        <p>Avant d'ajouter tous les ingrédients, veuillez vérifier que tous ceux dont vous avez besoin
+        se trouvent dans cette liste. Dans le cas où il en manquerait, veuillez aller les ajouter en
+        cliquant sur ce lien <a href="{{url_for('ajout_ingredient')}}">ici</a>.</p>
+    <table class="test">
+    <thead>
+        <tr>
+            <th><label class="col-sm-2 col-form-label">Ingrédients</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <select name="ingredient">
+                    <option value="">Choisir une option</option>
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.ingredient_nom}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="quantity"
+                       placeholder="ex : 1 kg - 3 - 6 morceaux">
+            </td>
+        </tr>
+    </tbody>
+</table>
+<input type="button" class="add" value="Ajouter une ligne">
+        <div>
+            <p>Pour valider vos choix, veuillez saisir le nombre ci-dessous:</p>
+            <p>{{plat.plat_id}}</p>
+           <input class="form-control" name="keyword" type="number" placeholder="ex : 36" aria-label="Recherche">
+        </div>
+        <div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+        </form>
+</div>
+{% endblock %}
