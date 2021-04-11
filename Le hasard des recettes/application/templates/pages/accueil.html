@@ -1,8 +1,8 @@
 {% extends "conteneur.html" %}
 
 {% block corps %}
-    <h1>Bienvenue</h1>
-    <div>
+<h1>Bienvenue</h1>
+<div>
     <p>Vous êtes sur la page d'accueil d'une application Flask.</p>
     <p>Cette application recense des liens vers de bonnes recettes de cuisine.</p>
     <p>Pour l'instant, il est possible de faire une recherche parmi les plats proposés.</p>
@@ -10,10 +10,6 @@
         <span><a href="{{url_for('plat')}}">Liste générale des plats</a> | <a href="{{url_for('ingredients')}}">
             Liste générale des ingrédients</a></span>
     </div>
-    <p>Les améliorations de cette applications sont les suivantes :</p>
-    <ul>
-        <li>Rendre les liens vers sur les plats cliquables</li>
-        <li>Ajouter une fonctionnalité de récupération de plat au hasard</li>
-    </ul>
+    </div>
 </div>
 {% endblock %}
