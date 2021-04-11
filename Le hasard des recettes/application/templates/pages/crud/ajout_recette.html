@@ -6,6 +6,7 @@
 <h1>Ajout de recette</h1>
 <p>Complétez le formulaire et cliquez sur "Valider".</p>
 <form class="form" method="POST" action="{{url_for('ajout_recette')}}">
+    {{statut}}
     <div class="form-group-row">
         <label for="register-nom" class="col-sm-2 col-form-label">Nom de la recette</label>
         <div class="col-sm-10">

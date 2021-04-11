@@ -95,7 +95,7 @@ class Plat(db.Model):
         except Exception as erreur:
             return False, [str(erreur)]
         
-        @staticmethod
+    @staticmethod
     def retrait(objet):
         db.session.delete(objet)
         db.session.commit()
