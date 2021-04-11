@@ -42,4 +42,4 @@ cd Le\ hasard\ des\ recettes
 ```shell
 python3 run.py
 ```
-A partir de là, l'application devrait fonctionner d'elle-même.
+A partir de là, l'application devrait fonctionner d'elle-même. Pour l'ouvrir dans votre navigateur, il faudra simplement cliquer sur l'adresse indiquée dans votre terminal.
