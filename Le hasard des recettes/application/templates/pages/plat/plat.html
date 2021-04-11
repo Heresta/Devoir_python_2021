@@ -6,10 +6,6 @@
         <p>Rechercher par : <a href="recherche_plat_convives">Nombre de convives</a> ou
             <a href="{{url_for('recherche_plat_type')}}">Type de recette</a></p>
     </div>
-    <div>
-        {{statut}}
-        {{donnees}}
-    </div>
     <p>
         {% if plats %}
         Il y a {{ plats|length }} plats enregistrés :</p>
