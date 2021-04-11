@@ -16,16 +16,22 @@
     Editer cette recette ({{plat.plat_nom}})</a></p>
             <h2>Informations</h2>
             <dl>
-                <dt>Type de plat :</dt><dd>{{plat.plat_type}}</dd>
+                <dt>Type du plat :</dt><dd>{{plat.plat_type}}</dd>
                 <dt>Nombre de convives :</dt><dd>{{plat.plat_nombre_convives}}</dd>
-                <dt>Lien vers la recette :</dt><dd>{{plat.plat_recette}}</dd>
+                <dt>Lien vers la recette :</dt><dd><a href="{{plat.plat_recette}}">{{plat.plat_recette}}</a></dd>
             </dl>
             <h2>Ingrédients</h2>
+<p><a class="btn btn-secondary btn-lg" href="{{url_for('adding_ingredient', plat_id=plat.plat_id)}}">
+    Ajouter des ingrédients à cette recette ({{plat.plat_nom}})</a></p>
+                {% if i %}
             <ul>
                 {% for quantite, ingredient in i %}
                 <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a> : {{quantite}}</li>
                 {% endfor %}
             </ul>
+                {% else %}
+                <p>Les ingrédients de cette recette restent à ajouter.</p>
+                {% endif %}
     {% else %}
         La base de données est en cours de constitution
     {% endif %}
