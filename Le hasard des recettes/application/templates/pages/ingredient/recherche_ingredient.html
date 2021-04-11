@@ -3,7 +3,6 @@
 {% block titre %}| {{titre}}{% endblock %}
 
 {% block corps %}
-{% include "metadonnees/recherche_plat.html" %}
 <h1>{{titre}}</h1>
     {% if resultats %}
     <p>Il y a {{resultats.total}} ingrédients qui répondent à votre recherche.</p>
