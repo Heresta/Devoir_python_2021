@@ -15,37 +15,54 @@
                 background-image: none;
             }
         </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".add").click(function() {
+                var ligne = "<tr><td><select name='ingredient'>" +
+                            "<option value=''>Choisir une option</option>" +
+                            "{% for ingredient in ingredients %}" +
+                            "<option value='{{ingredient.ingredient_id}}'>{{ingredient.ingredient_nom}}</option>" +
+                            "{% endfor %}" +
+                        "</select></td><td>" +
+                "</td><td>" +
+                "<input type='text' class='form-control' name='quantite' placeholder='ex : 1 kg - 3 - 6 morceaux'>"
+                + "</td></tr>";
+                $("table.test").append(ligne);
+                });
+             });
+    </script>
 </head>
 <body>
-   <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand" href="{{url_for('accueil')}}">Le hasard des recettes</a>
+   <nav class="navbar navbar-expand-md navbar-dark hero justify-content-between">
+        <a class="navbar-brand expand" href="{{url_for('accueil')}}">Le hasard des recettes</a>
        <ul class="navbar-nav mr-auto">
            {% if not current_user.isauthenticated %}
            <li class="nav-item">
-               <a class="nav-link" href="{{url_for('inscription')}}">Inscription</a>
+               <a class="btn btn-secondary btn-lg" href="{{url_for('inscription')}}">Inscription</a>
            </li>
            <li class="nav-item">
-               <a class="nav-link" href="{{url_for('connexion')}}">Connexion</a>
-           </li>
-           {% else %}
-           <li class="nav-item">
-               <a class="nav-link" href="{{url_for('deconnexion')}}">Déconnexion ({{current_user.user_nom}})</a>
+               <a class="btn btn-secondary btn-lg" href="{{url_for('connexion')}}">Connexion</a>
            </li>
            <li class="nav-item">
                <a class="btn btn-secondary btn-lg" href="{{url_for('ajout_recette')}}">Ajouter une recette</a>
+           </li>
+           {% else %}
+           <li class="nav-item">
+               <a class="btn btn-secondary btn-lg" href="{{url_for('deconnexion')}}">Déconnexion ({{current_user.user_nom}})</a>
            </li>
            {% endif %}
        </ul>
        <form class="form-inline" action="{{url_for('recherche_plat')}}" method="GET">
            <input class="form-control" name="keyword" type="search" placeholder="Recherche de plat" aria-label="Recherche">
-           <button class="btn btn-outline-info" type="submit">Rechercher</button>
+           <button class="btn btn-secondary btn-lg" type="submit">Rechercher</button>
        </form>
        <form class="form-inline" action="{{url_for('recherche_ingredient')}}" method="GET">
            <input class="form-control" name="keyword" type="search" placeholder="Recherche d'ingrédient" aria-label="Recherche">
-           <button class="btn btn-outline-info" type="submit">Rechercher</button>
+           <button class="btn btn-secondary btn-lg" type="submit">Rechercher</button>
        </form>
-</nav>
-      {% block afternav %}{%endblock%}
+    </nav>
+{% block afternav %}{%endblock%}
       <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
@@ -64,5 +81,5 @@
             </div>
         </div>
       </div>
-</body>
+    </body>
 </html>

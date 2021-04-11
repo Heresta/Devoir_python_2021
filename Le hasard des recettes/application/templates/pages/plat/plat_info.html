@@ -12,12 +12,20 @@
             <p><a class="btn btn-secondary btn-lg" href="{{url_for('suppression', ids=plat.plat_id)}}">
                 Supprimer cette entrée ({{plat.plat_nom}})</a>
 </p>
+<p><a class="btn btn-secondary btn-lg" href="{{url_for('edition_recette', plat_id=plat.plat_id)}}">
+    Editer cette recette ({{plat.plat_nom}})</a></p>
             <h2>Informations</h2>
             <dl>
                 <dt>Type de plat :</dt><dd>{{plat.plat_type}}</dd>
                 <dt>Nombre de convives :</dt><dd>{{plat.plat_nombre_convives}}</dd>
                 <dt>Lien vers la recette :</dt><dd>{{plat.plat_recette}}</dd>
             </dl>
+            <h2>Ingrédients</h2>
+            <ul>
+                {% for quantite, ingredient in i %}
+                <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a> : {{quantite}}</li>
+                {% endfor %}
+            </ul>
     {% else %}
         La base de données est en cours de constitution
     {% endif %}

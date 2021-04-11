@@ -1,0 +1,150 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}| Recherche par type{% endblock %}
+
+{% block corps %}
+<h1>Recherche par type</h1>
+<div>
+    {% if resultats_alcool %}
+    <p>Il y a {{resultats_alcool|length}} ingrédients qui correspondent au type "Alcool".</p>
+        {% for ingredient in resultats_alcool %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% else %}
+    <p>La base de données est en cours de construction</p>
+    {% endif %}
+</div>
+<div>
+    {% if resultats_aromate %}
+    <p>Il y a {{resultats_aromate|length}} ingrédients qui correspondent au type "Aromate".</p>
+        {% for ingredient in resultats_aromate %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_condiment %}
+    <p>Il y a {{resultats_condiment|length}} ingrédients qui correspondent au type "Condiment".</p>
+        {% for ingredient in resultats_condiment %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_eau %}
+    <p>Il y a {{resultats_eau|length}} ingrédients qui correspondent au type "Eau".</p>
+        {% for ingredient in resultats_eau %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_epice %}
+    <p>Il y a {{resultats_epice|length}} ingrédients qui correspondent au type "Epice".</p>
+        {% for ingredient in resultats_epice %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_fromage %}
+    <p>Il y a {{resultats_fromage|length}} ingrédients qui correspondent au type "Fromage".</p>
+        {% for ingredient in resultats_fromage %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_fruit %}
+    <p>Il y a {{resultats_fruit|length}} ingrédients qui correspondent au type "Fruit".</p>
+        {% for ingredient in resultats_fruit %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_fruit_mer %}
+    <p>Il y a {{resultats_fruit_mer|length}} ingrédients qui correspondent au type "Fruit de mer".</p>
+        {% for ingredient in resultats_fruit_mer %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_feculent %}
+    <p>Il y a {{resultats_feculent|length}} ingrédients qui correspondent au type "Féculent".</p>
+        {% for ingredient in resultats_feculent %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_ingredient_prepare %}
+    <p>Il y a {{resultats_ingredient_prepare|length}} ingrédients qui correspondent au type "Ingrédient préparé".</p>
+        {% for ingredient in resultats_ingredient_prepare %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_laitage %}
+    <p>Il y a {{resultats_laitage|length}} ingrédients qui correspondent au type "Laitage".</p>
+        {% for ingredient in resultats_laitage %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_legume %}
+    <p>Il y a {{resultats_legume|length}} ingrédients qui correspondent au type "Légume".</p>
+        {% for ingredient in resultats_legume %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_oeuf %}
+    <p>Il y a {{resultats_oeuf|length}} ingrédients qui correspondent au type "Oeuf".</p>
+        {% for ingredient in resultats_oeuf %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% if resultats_viande %}
+    <p>Il y a {{resultats_viande|length}} ingrédients qui correspondent au type "Viande".</p>
+        {% for ingredient in resultats_viande %}
+        <ul>
+            <li><a href="{{url_for('ingredient', ingredient_id=ingredient.ingredient_id)}}">{{ingredient.ingredient_nom}}</a></li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+</div>
+<p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

@@ -105,3 +105,4 @@ class Ingredient(db.Model):
     ingredient_id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True, nullable=False)
     ingredient_nom = db.Column(db.Text)
     ingredient_type = db.Column(db.Text)
+    composition = db.relationship("Composition", back_populates="composition_ingredient")
